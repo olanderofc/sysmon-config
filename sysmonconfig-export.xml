@@ -554,8 +554,45 @@
 			<Hashes name="Alert=Gootkit Banker Malware!" condition="contains">71345b139166482acaa568ac8816c7bc</Hashes><!--Malware Traffic Internals: BlackTDS Leads to Gootkit Banking Malware Distribution: https://www.vkremez.com/2018/03/3-29-2018-malware-traffic-internals.html-->
 			<Hashes name="Alert=Gootkit Banker Malware!" condition="contains">1b60021baedc3f9201bcdb40e9b87f62</Hashes><!--Malware Traffic Internals: BlackTDS Leads to Gootkit Banking Malware Distribution: https://www.vkremez.com/2018/03/3-29-2018-malware-traffic-internals.html-->
 			<Hashes name="Alert=Gootkit Banker Malware!" condition="contains">c7c8d584758854bbe0d8e64ef53ae1a8</Hashes><!--Malware Traffic Internals: BlackTDS Leads to Gootkit Banking Malware Distribution: https://www.vkremez.com/2018/03/3-29-2018-malware-traffic-internals.html-->
+		
 		</ProcessCreate>
 		<ProcessCreate onmatch="exclude">
+
+			<!-- SECTION: Added by @olanderofc -->
+			
+			<!--SECTION: Splunk -->
+			<!--Splunk workers doing random things to collect data-->
+			<ParentCommandLine condition="contains">C:\Program Files\SplunkUniversalForwarder\bin\splunkd.exe</ParentCommandLine>
+			<CommandLine condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-regmon.exe</CommandLine>
+			<CommandLine condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-powershell.exe" --ps2</CommandLine>
+			<CommandLine condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-MonitorNoHandle.exe</CommandLine>
+			<CommandLine condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-winprintmon.exe</CommandLine>
+			<CommandLine condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-netmon.exe</CommandLine>
+			<CommandLine condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-admon.exe</CommandLine>
+
+			<!--SECTION: Google -->
+			<!--Chrome doing updates-->
+			<CommandLine condition="is">"C:\Program Files\Google\Update\GoogleUpdate.exe" /ua /installsource scheduler</CommandLine>
+			<CommandLine condition="is">"C:\Program Files\Google\Update\GoogleUpdate.exe" /ua /installsource core</CommandLine>
+			<CommandLine condition="is">"C:\Program Files\Google\Update\GoogleUpdate.exe" /svc</CommandLine>
+
+
+			<!--SECTION: Windows -->
+			<!--Windows noise -->
+			<CommandLine condition="is">C:\Windows\system32\schtasks.exe /delete /f /TN "Microsoft\Windows\Customer Experience Improvement Program\Uploader"</CommandLine>
+			<CommandLine condition="end with">C:\WINDOWS\System32\svchost.exe -k wsappx -p -s ClipSVC</CommandLine>
+			<ParentCommandLine condition="is">c:\windows\system32\svchost.exe -k netsvcs -p -s Schedule</ParentCommandLine>
+
+			<!-- SECTION: VMware Workstation -->
+			<!--VMware executing when you resume a virtual machine-->
+			<CommandLine condition="begin with">"C:\Program Files (x86)\VMware\VMware Workstation\x64\vmware-vmx.exe" -T querytoken</CommandLine>
+			<!--VMware start VMware workstation-->
+			<Image condition="is">C:\Program Files (x86)\VMware\VMware Workstation\vmware.exe</Image>
+			<Image condition="is">C:\Program Files (x86)\VMware\VMware Workstation\vmware-tray.exe</Image>
+			<Image condition="is">C:\Program Files (x86)\VMware\VMware Workstation\vmware-unity-helper.exe</Image>
+			<!-- SECTION: Added by @olanderofc -->
+
+
 			<!--SECTION: Microsoft Windows-->
 			<IntegrityLevel condition="is">AppContainer</IntegrityLevel> <!--Microsoft:Windows: Don't care about sandboxed processes-->
 			<CommandLine condition="begin with">C:\Windows\system32\DllHost.exe /Processid</CommandLine> <!--Microsoft:Windows-->
@@ -2307,6 +2344,16 @@
 			<!--Default-disable <TargetFileName condition="end with">.kirbi</TargetFileName> --> <!-- [ https://github.com/gentilkiwi/mimikatz/wiki/module-~-kerberos ] -->
 		</FileCreate>
 		<FileCreate onmatch="exclude">
+
+
+			<!-- SECTION: Added by @olanderofc -->
+			<!--Vmware Workstation creating .lck files when you resume a virtual machine-->
+
+			<Image condition="is">C:\Program Files (x86)\VMware\VMware Workstation\x64\vmware-vmx.exe</Image>
+			<Image condition="is">C:\Program Files (x86)\VMware\VMware Workstation\vmware.exe</Image>
+			<!-- SECTION: Added by @olanderofc -->
+
+
 			<TargetFilename condition="begin with">C:\Windows\System32\config\systemprofile\AppData\Roaming\Microsoft\SystemCertificates\Request\Certificates\</TargetFilename> <!--Microsoft:Windows: taskhostw re-creates certificate store constantly-->
 			<TargetFilename condition="end with">\Downloads</TargetFilename> <!-- Microsoft:Windows: Cleanup noise of stub folder creation -->
 			<TargetFilename condition="end with">\Start Menu</TargetFilename> <!-- Microsoft:Windows: Cleanup noise of stub folder creation -->
@@ -2970,6 +3017,18 @@
 			<PipeName condition="contains">\</PipeName><!--Include Everything else to mark above rules-->
 		</PipeEvent>
 		<PipeEvent onmatch="exclude">
+
+		<!-- SECTION: Added by @olanderofc -->
+		<!--VMware workstation, when resuming a virtual machine-->
+		<Image condition="is">C:\Program Files (x86)\VMware\VMware Workstation\vmware-authd.exe</Image>
+		<Image condition="is">C:\Program Files (x86)\VMware\VMware Workstation\x64\vmware-vmx.exe</Image>
+
+		<!-- SECTION: Added by @olanderofc -->
+		
+
+		<PipeName condition="contains">lsass</PipeName>
+		
+
 		<!--COMMENT: Exclude known-good pipe users-->
 				<!--ADDITIONAL REFERENCE: [ https://www.cobaltstrike.com/help-smb-beacon ] -->
 				<!--ADDITIONAL REFERENCE: [ https://blog.cobaltstrike.com/2015/10/07/named-pipe-pivoting/ ] -->
