@@ -577,10 +577,17 @@
 			<CommandLine condition="is">"C:\Program Files\Google\Update\GoogleUpdate.exe" /svc</CommandLine>
 
 
-			<!--SECTION: Windows -->
-			<!--Windows noise -->
+			<!--SECTION: Windows 10 -->
+			<!--Windows 10 noise -->
 			<CommandLine condition="is">C:\Windows\system32\schtasks.exe /delete /f /TN "Microsoft\Windows\Customer Experience Improvement Program\Uploader"</CommandLine>
 			<CommandLine condition="end with">C:\WINDOWS\System32\svchost.exe -k wsappx -p -s ClipSVC</CommandLine>
+			<CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k wsappx -p -s AppXSvc</CommandLine>
+			<CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k LocalServiceNetworkRestricted -p -s WinHttpAutoProxySvc</CommandLine>
+			<CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k appmodel -p -s camsvc</CommandLine>
+			<CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k netsvcs -p -s wlidsvc</CommandLine>
+			<CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k SDRSVC</CommandLine>
+
+			<ParentCommandLine condition="is">c:\windows\system32\svchost.exe -k netsvcs -p -s Appinfo</ParentCommandLine>
 			<ParentCommandLine condition="is">c:\windows\system32\svchost.exe -k netsvcs -p -s Schedule</ParentCommandLine>
 
 			<!-- SECTION: VMware Workstation -->
