@@ -983,6 +983,13 @@
 
 		<!--DATA: RuleName, UtcTime, ProcessGuid, ProcessId, Image, User, Protocol, Initiated, SourceIsIpv6, SourceIp, SourceHostname, SourcePort, SourcePortName, DestinationIsIpV6, DestinationIp, DestinationHostname, DestinationPort, DestinationPortName-->
 		<NetworkConnect onmatch="include">
+
+
+			<!-- SECTION: Added by @olanderofc -->
+			<Image condition="image">lsass.exe</Image>
+			<Image condition="image">powershell_ise.exe</Image>
+			<!-- SECTION: Added by @olanderofc -->
+
 			<!--Suspicious sources for network-connecting binaries-->
 			<Image condition="begin with">C:\Users</Image> <!--Tools downloaded by users can use other processes for networking, but this is a very valuable indicator.-->
 			<Image name="Alert=Temp file location network connection,suspicious_net_event=True" condition="contains">\temp\</Image> <!--Network Connection in Temp Directories-->
@@ -1015,6 +1022,8 @@
 			<Image condition="image">C:\Windows\system32\svchost.exe</Image> <!--Windows Services hidden by Svchost.exe, BITS File Transfer program-->
 			<Image name="Alert=MSHTA Network Connection,suspicious_net_event=True" condition="image">mshta.exe</Image>
 			<Image name="Info=Powershell Network Connection,suspicious_net_event=True" condition="image">powershell.exe</Image> <!--Microsoft:WindowsPowerShell: | Credit @Cyb3rOps -->
+			
+				
 			<Image condition="contains">psexe</Image><!--Detect PSExec, PSexec services-->
 			<Image condition="contains">pskill</Image><!--Detect pskill-->
 			<Image condition="contains">psshutdown</Image><!--Detect PsShutdown-->
@@ -1497,6 +1506,10 @@
 			<ImageLoaded name="MitreRef=T1128,Technique=Netsh Helper Beacon DLL,Tactic=Persistence,Alert=Cobalt Strike Netsh Helper Beacon" condition="contains">NetshHelperBeacon</ImageLoaded>
 			<Image name="MitreRef=T1128,Technique=Netsh Helper Beacon DLL,Tactic=Persistence" condition="contains">netsh.exe</Image>
 			<ImageLoaded name="Alert=Ramnit Banker Malware!" condition="contains">rmnsoft.dll</ImageLoaded>
+			<!-- added by @olanderofc -->
+			<ImageLoaded condition="contains">C:\Users</ImageLoaded>
+			<ImageLoaded condition="end with">lsass.exe</ImageLoaded>
+			<!-- added by @olanderofc -->
 		</ImageLoad>
 		<ImageLoad onmatch="exclude">
 			<SignatureStatus condition="is">Valid</SignatureStatus>
@@ -1636,13 +1649,15 @@
 			<TargetImage condition="end with">:\Windows\System32\winlogon.exe</TargetImage>
 			<SourceImage condition="contains">powershell.exe</SourceImage>
 			<TargetImage condition="contains">verclsid.exe</TargetImage>
-			<CallTrace condition="contains">VBE7.dll</CallTrace>
+			<CallTrace condition="contains" name="Alert=Possible shellcode from Office macros">VBE7.dll</CallTrace>
 			<CallTrace condition="contains">CorperfmontExt.dll</CallTrace>
+
 		<!--COMMENT:	Monitor for processes accessing other process' memory. This can be valuable, but can cause massive event glut.
 				Disabled by default since including even one entry here activates this component. Reward/performance decision.
 				Encourage you to experiment with this feature yourself.
 				Uses 4mbs+ IO -->
 		</ProcessAccess>
+
 		<ProcessAccess onmatch="exclude">
 			<!-- Filter out common access masks
 			A reference is available here for the mask: https://msdn.microsoft.com/en-us/library/windows/desktop/ms684880%28v=vs.85%29.aspx
