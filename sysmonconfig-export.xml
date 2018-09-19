@@ -586,7 +586,8 @@
 			<CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k appmodel -p -s camsvc</CommandLine>
 			<CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k netsvcs -p -s wlidsvc</CommandLine>
 			<CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k SDRSVC</CommandLine>
-
+			
+			<ParentCommandLine condition="is">C:\WINDOWS\system32\cleanmgr.exe /autoclean /d C:</ParentCommandLine>
 			<ParentCommandLine condition="is">c:\windows\system32\svchost.exe -k netsvcs -p -s Appinfo</ParentCommandLine>
 			<ParentCommandLine condition="is">c:\windows\system32\svchost.exe -k netsvcs -p -s Schedule</ParentCommandLine>
 
