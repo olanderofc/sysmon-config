@@ -569,13 +569,17 @@
 			<CommandLine condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-winprintmon.exe</CommandLine>
 			<CommandLine condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-netmon.exe</CommandLine>
 			<CommandLine condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunk-admon.exe</CommandLine>
+			<CommandLine condition="is">"C:\Program Files\SplunkUniversalForwarder\bin\SplunkD.EXE" btool server list general --no-log</CommandLine>
+			<CommandLine condition="is">btool server list general --no-log</CommandLine>
+			<CommandLine condition="is">"C:\Program Files\SplunkUniversalForwarder\bin\SplunkD.EXE" btool check --no-log</CommandLine>
+			<CommandLine condition="is">"C:\Program Files\SplunkUniversalForwarder\bin\btool" check --no-log</CommandLine>
 
 			<!--SECTION: Google -->
-			<!--Chrome doing updates-->
+			<!--Chrome doing updates and starting-->
 			<CommandLine condition="is">"C:\Program Files\Google\Update\GoogleUpdate.exe" /ua /installsource scheduler</CommandLine>
 			<CommandLine condition="is">"C:\Program Files\Google\Update\GoogleUpdate.exe" /ua /installsource core</CommandLine>
 			<CommandLine condition="is">"C:\Program Files\Google\Update\GoogleUpdate.exe" /svc</CommandLine>
-
+			<CommandLine condition="is">"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --profile-directory=Default</CommandLine>
 
 			<!--SECTION: Windows 10 -->
 			<!--Windows 10 noise -->
@@ -586,7 +590,20 @@
 			<CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k appmodel -p -s camsvc</CommandLine>
 			<CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k netsvcs -p -s wlidsvc</CommandLine>
 			<CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k SDRSVC</CommandLine>
-			
+			<CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k netsvcs -p -s gpsvc</CommandLine>
+			<CommandLine condition="is">c:\windows\system32\svchost.exe -k netsvcs -p -s BITS</CommandLine>
+			<CommandLine condition="is">"C:\WINDOWS\system32\wuauclt.exe" /RunHandlerComServer</CommandLine>
+			<CommandLine condition="is">C:\WINDOWS\System32\svchost.exe -k LocalSystemNetworkRestricted -p -s WdiSystemHost</CommandLine>
+			<CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k wusvcs -p -s WaaSMedicSvc</CommandLine>
+			<CommandLine condition="is">C:\WINDOWS\System32\svchost.exe -k netsvcs -p -s Browser</CommandLine>
+			<CommandLine condition="is">C:\WINDOWS\system32\ssText3d.scr /s</CommandLine>
+			<CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k netsvcs -p -s wisvc</CommandLine>
+			<CommandLine condition="is">C:\WINDOWS\system32\devicecensus.exe UserCxt</CommandLine>
+			<CommandLine condition="is">C:\WINDOWS\System32\svchost.exe -k netsvcs -p</CommandLine>
+			<CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k netsvcs -s LxpSvc</CommandLine>
+			<CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k LocalService -s W32Time</CommandLine>
+			<CommandLine condition="is">C:\WINDOWS\System32\svchost.exe -k LocalServiceNetworkRestricted -p</CommandLine>
+			<CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -s ScDeviceEnum</CommandLine>			
 			<ParentCommandLine condition="is">C:\WINDOWS\system32\cleanmgr.exe /autoclean /d C:</ParentCommandLine>
 			<ParentCommandLine condition="is">c:\windows\system32\svchost.exe -k netsvcs -p -s Appinfo</ParentCommandLine>
 			<ParentCommandLine condition="is">c:\windows\system32\svchost.exe -k netsvcs -p -s Schedule</ParentCommandLine>
@@ -598,8 +615,22 @@
 			<Image condition="is">C:\Program Files (x86)\VMware\VMware Workstation\vmware.exe</Image>
 			<Image condition="is">C:\Program Files (x86)\VMware\VMware Workstation\vmware-tray.exe</Image>
 			<Image condition="is">C:\Program Files (x86)\VMware\VMware Workstation\vmware-unity-helper.exe</Image>
-			<!-- SECTION: Added by @olanderofc -->
+			<CommandLine condition="is">"C:\Program Files (x86)\Common Files\VMware\USB\vmware-usbarbitrator64.exe"</CommandLine>
+			<CommandLine condition="is">"C:\Program Files (x86)\VMware\VMware Workstation\vmware-authd.exe"</CommandLine>
 
+
+			<!-- SECTION: Windows Defender -->
+			<CommandLine condition="is">"C:\ProgramData\Microsoft\Windows Defender\platform\4.18.1810.5-0\MpCmdRun.exe" SignatureUpdate -ScheduleJob -RestrictPrivileges</CommandLine>
+			<CommandLine condition="is">"C:\ProgramData\Microsoft\Windows Defender\platform\4.18.1810.5-0\MpCmdRun.exe" SignatureUpdate -ScheduleJob -RestrictPrivileges -Reinvoke</CommandLine>
+			<CommandLine condition="is">"C:\ProgramData\Microsoft\Windows Defender\platform\4.18.1810.5-0\MpCmdRun.exe" SignaturesUpdateService -ScheduleJob -UnmanagedUpdate</CommandLine>
+			<CommandLine condition="is">"C:\ProgramData\Microsoft\Windows Defender\platform\4.18.1809.2-0\MpCmdRun.exe" SignatureUpdate -ScheduleJob -RestrictPrivileges</CommandLine>
+			<CommandLine condition="is">"C:\ProgramData\Microsoft\Windows Defender\platform\4.18.1809.2-0\MpCmdRun.exe" SignatureUpdate -ScheduleJob -RestrictPrivileges -Reinvoke</CommandLine>
+			<CommandLine condition="is">"C:\ProgramData\Microsoft\Windows Defender\platform\4.18.1809.2-0\MpCmdRun.exe" SignaturesUpdateService -ScheduleJob -UnmanagedUpdate</CommandLine>
+
+			<!-- SECTION: OneDrive -->
+			<CommandLine condition="is">"C:\Windows\SysWOW64\OneDriveSetup.exe" /thfirstsetup</CommandLine>
+
+			<!-- SECTION: Added by @olanderofc -->
 
 			<!--SECTION: Microsoft Windows-->
 			<IntegrityLevel condition="is">AppContainer</IntegrityLevel> <!--Microsoft:Windows: Don't care about sandboxed processes-->
@@ -700,6 +731,10 @@
 			<CommandLine condition="is">C:\Windows\System32\svchost.exe -k netsvcs</CommandLine><!--Microsoft:Windows Network Services-->
 			<CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k GPSvcGroup</CommandLine><!--Microsoft:Windows Network Services-->
 			<CommandLine condition="is">C:\Windows\System32\svchost.exe -k tapisrv</CommandLine><!--Microsoft:Windows Network Services-->
+
+
+			
+
 			<ParentCommandLine condition="is">C:\WINDOWS\System32\svchost.exe -k wsappx</ParentCommandLine> <!-- Windows 10 AppX Deployment Noise -->
 			<ParentCommandLine condition="is">C:\Windows\System32\svchost.exe -k netsvcs</ParentCommandLine><!--Microsoft:Windows Network Services: Spawns Consent.exe-->
 			<ParentCommandLine condition="is">C:\Windows\system32\svchost.exe -k LocalSystemNetworkRestricted</ParentCommandLine><!--Microsoft:Windows Network Services-->
