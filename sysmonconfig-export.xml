@@ -1027,6 +1027,7 @@
 			<!-- SECTION: Added by @olanderofc -->
 			<Image condition="image">lsass.exe</Image>
 			<Image condition="image">powershell_ise.exe</Image>
+
 			<!-- SECTION: Added by @olanderofc -->
 
 			<!--Suspicious sources for network-connecting binaries-->
@@ -1323,6 +1324,29 @@
 			<Image condition="is">C:\Program Files\Microsoft\Exchange Server\V15\Bin\MSExchangeFrontendTransport.exe</Image>
 			<Image condition="is">C:\Program Files\Microsoft\Exchange Server\V15\Bin\MSExchangeDelivery.exe</Image>
 			<!--Ignore Microsoft Connections-->
+			
+			<!-- Added by olanderofc -->
+			<!--SECTION: Browsers -->
+			<Image condition="is">C:\Program Files (x86)\Google\Chrome\Application\chrome.exe</Image>
+			<Image condition="is">C:\Program Files (x86)\Internet Explorer\iexplore.exe</Image>
+			<Image condition="is">C:\Program Files\internet explorer\iexplore.exe</Image>
+			<Image condition="is">C:\Windows\SystemApps\Microsoft.MicrosoftEdge_8wekyb3d8bbwe\MicrosoftEdgeCP.exe</Image>
+			<Image condition="is">C:\Program Files (x86)\Google\Update\GoogleUpdate.exe</Image>
+			
+			<!--SECTION: VMware -->
+			<Image condition="is">C:\Program Files (x86)\VMware\VMware Workstation\vmware.exe</Image>
+			
+			<!--SECTION: Microsoft Photos -->
+			<Image condition="is">C:\Program Files\WindowsApps\Microsoft.Windows.Photos_2018.18091.17210.0_x64__8wekyb3d8bbwe\Microsoft.Photos.exe</Image>
+			<Image condition="is">C:\Program Files\WindowsApps\Microsoft.Windows.Photos_2018.18091.16610.0_x64__8wekyb3d8bbwe\Microsoft.Photos.exe</Image>
+			<Image condition="is">C:\Program Files\WindowsApps\Microsoft.Windows.Photos_2018.18081.14710.0_x64__8wekyb3d8bbwe\Microsoft.Photos.exe</Image>
+			
+			<!--SECTION: Microsoft Cortana -->
+			<Image condition="is">C:\Windows\SystemApps\Microsoft.Windows.Cortana_cw5n1h2txyewy\SearchUI.exe</Image>
+		
+
+			<!-- End added by olanderofc -->
+
 			<!--Microsoft Net Connections-->
 			<!--Microsoft ASN IP Block-->
 			<DestinationHostname condition="end with">aps.windows.com</DestinationHostname>
