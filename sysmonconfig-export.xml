@@ -2478,14 +2478,19 @@
 		</FileCreate>
 		<FileCreate onmatch="exclude">
 
-
+			
 			<!-- SECTION: Added by @olanderofc -->
 			<!--Vmware Workstation creating .lck files when you resume a virtual machine-->
 
 			<Image condition="is">C:\Program Files (x86)\VMware\VMware Workstation\x64\vmware-vmx.exe</Image>
 			<Image condition="is">C:\Program Files (x86)\VMware\VMware Workstation\vmware.exe</Image>
-			<!-- SECTION: Added by @olanderofc -->
 
+			<Image condition="is">C:\Windows\winsxs\x86_microsoft-windows-servicingstack_31bf3856ad364e35_10.0.10240.17831_none_b53bd52fa99d76dc\TiWorker.exe</Image>
+
+			<!-- SECTION: Added by @olanderofc -->
+			
+			
+			
 
 			<TargetFilename condition="begin with">C:\Windows\System32\config\systemprofile\AppData\Roaming\Microsoft\SystemCertificates\Request\Certificates\</TargetFilename> <!--Microsoft:Windows: taskhostw re-creates certificate store constantly-->
 			<TargetFilename condition="end with">\Downloads</TargetFilename> <!-- Microsoft:Windows: Cleanup noise of stub folder creation -->
