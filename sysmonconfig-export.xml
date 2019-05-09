@@ -574,6 +574,40 @@
 			<CommandLine condition="is">"C:\Program Files\SplunkUniversalForwarder\bin\SplunkD.EXE" btool check --no-log</CommandLine>
 			<CommandLine condition="is">"C:\Program Files\SplunkUniversalForwarder\bin\btool" check --no-log</CommandLine>
 
+
+			<!-- SECTION: Added by @olanderofc - 2019-05-09 START-->
+			<CommandLine condition="is">"C:\Program Files\SplunkUniversalForwarder\bin\splunk.exe"  _internal check-xml-files --answer-yes --no-prompt</CommandLine>
+			<CommandLine condition="is">btool  server list general --no-log</CommandLine>
+			<CommandLine condition="is">"C:\Program Files\SplunkUniversalForwarder\bin\SplunkD.EXE" btool server list replication_port --no-log</CommandLine>
+			<CommandLine condition="is">btool  server list replication_port --no-log</CommandLine>
+			<CommandLine condition="is">"C:\Program Files\SplunkUniversalForwarder\bin\splunkd" check-transforms-keys</CommandLine>
+			<CommandLine condition="is">"C:\Program Files\SplunkUniversalForwarder\bin\SplunkD.EXE" btool validate-regex --log-warnings</CommandLine>
+			<CommandLine condition="is">"C:\Program Files\SplunkUniversalForwarder\bin\btool" validate-regex --log-warnings</CommandLine>
+			<CommandLine condition="is">"C:\Program Files\SplunkUniversalForwarder\bin\SplunkD.EXE" btool validate-strptime --log-warnings</CommandLine>
+			<CommandLine condition="is">"C:\Program Files\SplunkUniversalForwarder\bin\btool" validate-strptime --log-warnings</CommandLine>
+			<CommandLine condition="is">"C:\Program Files\SplunkUniversalForwarder\bin\SplunkD.EXE" btool fix-dangling</CommandLine>
+			<CommandLine condition="is">"C:\Program Files\SplunkUniversalForwarder\bin\btool" fix-dangling</CommandLine>
+			<CommandLine condition="is">"C:\Program Files\SplunkUniversalForwarder\bin\SplunkD.EXE" btool pooling validate-quiet --no-log</CommandLine>
+			<CommandLine condition="is">"C:\Program Files\SplunkUniversalForwarder\bin\btool" pooling validate-quiet --no-log</CommandLine>
+			<CommandLine condition="is">"C:\Program Files\SplunkUniversalForwarder\bin\SplunkD.EXE" check-license</CommandLine>
+			<CommandLine condition="is">"C:\Program Files\SplunkUniversalForwarder\bin\SplunkD.EXE" generate-ssl</CommandLine>
+			<CommandLine condition="is">"C:\Program Files\SplunkUniversalForwarder\bin\splunk.exe"  _internal pre-flight-checks --answer-yes --no-prompt</CommandLine>
+			<CommandLine condition="is">"C:\Program Files\SplunkUniversalForwarder\bin\SplunkD.EXE" btool server list kvstore --no-log</CommandLine>
+			<CommandLine condition="is">btool  server list kvstore --no-log</CommandLine>
+			<CommandLine condition="is">"C:\Program Files\SplunkUniversalForwarder\bin\SplunkD.EXE" btool web list settings --no-log</CommandLine>
+			<CommandLine condition="is">btool  web list settings --no-log</CommandLine>
+			<CommandLine condition="is">"C:\Program Files\SplunkUniversalForwarder\bin\splunk.exe"  _internal_extra_splunkd_service_args</CommandLine>
+			<CommandLine condition="is">"C:\Program Files\SplunkUniversalForwarder\bin\splunk.exe"  _RAW_envvars</CommandLine>
+			<CommandLine condition="is">"C:\Program Files\SplunkUniversalForwarder\bin\splunkd.exe" service</CommandLine>
+			<CommandLine condition="is">"C:\Program Files\SplunkUniversalForwarder\bin\SplunkD.EXE" btool server list httpServerListener: --no-log</CommandLine>
+			<CommandLine condition="is">btool  server list httpServerListener: --no-log</CommandLine>
+			<CommandLine condition="is">"C:\Program Files\SplunkUniversalForwarder\bin\SplunkD.EXE" btool server list httpServer --no-log</CommandLine>
+			<CommandLine condition="is">btool  server list httpServer --no-log</CommandLine>
+			<CommandLine condition="is">"C:\Program Files\SplunkUniversalForwarder\bin\Splunk.EXE" restart --waitonpid=5104</CommandLine>
+			<CommandLine condition="is"></CommandLine>
+			<!-- SECTION: Added by @olanderofc - 2019-05-09 END-->
+
+
 			<!--SECTION: Google -->
 			<!--Chrome doing updates and starting-->
 			<CommandLine condition="is">"C:\Program Files\Google\Update\GoogleUpdate.exe" /ua /installsource scheduler</CommandLine>
@@ -606,7 +640,15 @@
 			<CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -s ScDeviceEnum</CommandLine>
 			<CommandLine condition="is">c:\windows\system32\svchost.exe -k bcastdvruserservice -s BcastDVRUserService</CommandLine>
 			<CommandLine condition="is">c:\windows\system32\svchost.exe -k wbiosvcgroup -s WbioSrvc</CommandLine>
-							
+			
+			<!--Added 2019-05-09 START -->
+			<CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k netsvcs -p -s wuauserv</CommandLine>
+			<CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k netsvcs -p -s AppMgmt</CommandLine>
+			<CommandLine condition="is">C:\WINDOWS\System32\svchost.exe -k LocalServiceAndNoImpersonation -p -s wcncsvc</CommandLine>
+			<CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k BcastDVRUserService -s BcastDVRUserService</CommandLine>
+			<CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k LocalServiceNetworkRestricted -p -s NgcCtnrSvc</CommandLine>
+			<CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p -s NgcSvc</CommandLine>
+			<!--Added 2019-05-09 END -->
 			
 			<ParentCommandLine condition="is">C:\WINDOWS\system32\cleanmgr.exe /autoclean /d C:</ParentCommandLine>
 			<ParentCommandLine condition="is">c:\windows\system32\svchost.exe -k netsvcs -p -s Appinfo</ParentCommandLine>
